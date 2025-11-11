@@ -1,0 +1,6 @@
+﻿{
+  "get_mastery_request": { "user_id": "string", "skill_id": "string" },
+  "get_mastery_response": { "user_id": "string", "skill_id": "string", "mastery": "float[0,1]" },
+  "next_items_request": { "user_id": "string", "candidates": [ { "item_id": "string", "skill_id": "string" } ], "k": "int" },
+  "next_items_response": { "user_id": "string", "items": [ { "item_id": "string", "skill_id": "string" } ] }
+}
