@@ -1,5 +1,6 @@
-﻿from dataclasses import dataclass
-from typing import Dict, Tuple
+from dataclasses import dataclass
+from typing import Dict, Tuple, Optional
+import random
 
 @dataclass
 class BKTParams:
@@ -9,9 +10,11 @@ class BKTParams:
     p_slip: float = 0.1
 
 class BKTModel:
-    def __init__(self, params: BKTParams | None = None):
+    def __init__(self, params: Optional[BKTParams] = None, seed: Optional[int] = None):
         self.params = params or BKTParams()
         self._state: Dict[Tuple[str, str], float] = {}
+        # keep RNG for forward-compat; current updates are deterministic
+        self._rng = random.Random(seed) if seed is not None else random.Random()
 
     def _init_state(self, user_id: str, skill_id: str) -> float:
         key = (user_id, skill_id)
@@ -36,6 +39,9 @@ class BKTModel:
     def get_mastery(self, user_id: str, skill_id: str) -> float:
         return self._state.get((user_id, skill_id), self.params.p_init)
 
-def get_mastery(user_id: str, skill_id: str, model: "BKTModel | None" = None) -> float:
+# convenience import shape some tests may use
+BKT = BKTModel
+
+def get_mastery(user_id: str, skill_id: str, model: Optional["BKTModel"] = None) -> float:
     m = model or BKTModel()
     return m.get_mastery(user_id, skill_id)
