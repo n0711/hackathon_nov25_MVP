@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+﻿<<<<<<< HEAD
 ﻿from __future__ import annotations
 from typing import List, Dict, Tuple
 from dataclasses import dataclass
@@ -121,3 +121,4 @@ class Recommender:
 def next_items(user_id: str, k: int, bkt: Optional[BKTModel] = None, catalog: Optional[Dict[str, Item]] = None, seed: Optional[int] = None) -> List[str]:
     return Recommender(bkt=bkt, catalog=catalog, seed=seed).next_items(user_id, k=k)
 >>>>>>> integration/stack-preview
+
