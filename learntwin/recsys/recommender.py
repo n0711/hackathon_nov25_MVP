@@ -2,8 +2,7 @@ from __future__ import annotations
 from typing import List, Dict, Tuple
 from dataclasses import dataclass
 from learntwin.models.models_bkt import BKTModel
-
-@dataclass integration/stack-preview
+@dataclass
 class Item:
     item_id: str
     skill_id: str
@@ -20,5 +19,5 @@ class Recommender:
         pool = allow_items or list(self.catalog.keys())
         scored: List[Tuple[float, str]] = [(self.score(user_id, self.catalog[i]), i) for i in pool if i in self.catalog]
         scored.sort(reverse=True)
-        return [i for _, i in scored[:k]] integration/stack-preview
+        return [i for _, i in scored[:k]] 
 

@@ -1,4 +1,5 @@
 from __future__ import annotations
+from dataclasses import dataclass
 from typing import List, Dict, Any, Iterable, Tuple
 from .models_bkt import BKT
 

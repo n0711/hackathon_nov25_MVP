@@ -1,4 +1,5 @@
 from __future__ import annotations
+from dataclasses import dataclass
 from learntwin import BKT, Recommender
 from learntwin.models_bkt import BKTParams
 

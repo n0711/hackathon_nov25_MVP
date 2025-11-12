@@ -1,4 +1,5 @@
 from __future__ import annotations
+from dataclasses import dataclass
 from learntwin.models.models_bkt import BKTModel, BKTParams
 def test_bkt_update_math_correct_then_incorrect():
     m = BKTModel(BKTParams(p_init=0.2,p_learn=0.15,p_guess=0.2,p_slip=0.1))

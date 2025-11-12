@@ -1,7 +1,6 @@
 from __future__ import annotations
 from dataclasses import dataclass
-from typing import Dict, Tuple integration/stack-preview
-
+from typing import Dict, Tuple 
 @dataclass
 class BKTParams:
     p_init: float = 0.2
@@ -12,7 +11,7 @@ class BKTParams:
 class BKTModel:
 def __init__(self, params: BKTParams | None = None):
         self.params = params or BKTParams()
-        self._state: Dict[Tuple[str, str], float] = {} integration/stack-preview
+        self._state: Dict[Tuple[str, str], float] = {} 
 
     def _init_state(self, user_id: str, skill_id: str) -> float:
         key = (user_id, skill_id)
@@ -37,6 +36,6 @@ def __init__(self, params: BKTParams | None = None):
     def get_mastery(self, user_id: str, skill_id: str) -> float:
         return self._state.get((user_id, skill_id), self.params.p_init)
 
-def get_mastery(user_id: str, skill_id: str, model: "BKTModel | None" = None) -> float: integration/stack-preview
+def get_mastery(user_id: str, skill_id: str, model: "BKTModel | None" = None) -> float: 
     m = model or BKTModel()
     return m.get_mastery(user_id, skill_id)
