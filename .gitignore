@@ -1,12 +1,3 @@
-media/
-*.mp4
-*.mov
-*.avi
-*.mkv
-path/to/file.mp4
-
-.venv/
-node_modules/
-__pycache__/
+﻿__pycache__/
 *.pyc
-
+.pytest_cache/
