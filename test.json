@@ -1,0 +1,32 @@
+[
+  {
+    "class_id": "c1",
+    "student_id": 1,
+    "stuck": 0,
+    "got_it": 1,
+    "pause": 0,
+    "example": 1,
+    "confidence": 8,
+    "timestamp": "2025-11-12T14:55:30Z"
+  },
+  {
+    "class_id": "c1",
+    "student_id": 2,
+    "stuck": 1,
+    "got_it": 0,
+    "pause": 1,
+    "example": 0,
+    "confidence": 6,
+    "timestamp": "2025-11-12T14:55:30Z"
+  },
+  {
+    "class_id": "c2",
+    "student_id": 1,
+    "stuck": 0,
+    "got_it": 1,
+    "pause": 1,
+    "example": 1,
+    "confidence": 10,
+    "timestamp": "2025-11-12T14:55:30Z"
+  }
+]
