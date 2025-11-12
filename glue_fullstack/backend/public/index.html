@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Learntwin Glue Demo</title>
+  <style>
+    body { font-family: system-ui, sans-serif; margin: 2rem; max-width: 800px; }
+    textarea { width: 100%; }
+    button { margin-top: 0.5rem; padding: 0.5rem 1rem; }
+    pre { background: #111; color: #0f0; padding: 1rem; margin-top: 1rem; white-space: pre-wrap; }
+  </style>
+</head>
+<body>
+  <h1>Learntwin Glue Demo</h1>
+  <p>Type any test payload and send it to the backend. This is your full-stack mock path.</p>
+
+  <label for="input">Input text / JSON:</label>
+  <textarea id="input" rows="6">{ "example": "hackathon test" }</textarea>
+  <br />
+  <button id="sendBtn">Send to /api/mock</button>
+
+  <pre id="output">// Response will appear here...</pre>
+
+  <script>
+    document.getElementById("sendBtn").addEventListener("click", async () => {
+      const raw = document.getElementById("input").value;
+      let payload = raw;
+      try {
+        payload = JSON.parse(raw);
+      } catch (e) {
+        payload = { text: raw };
+      }
+
+      const out = document.getElementById("output");
+      out.textContent = "// Sending request...";
+
+      try {
+        const res = await fetch("/api/mock", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+        out.textContent = JSON.stringify(data, null, 2);
+      } catch (err) {
+        out.textContent = "ERROR: " + err;
+      }
+    });
+  </script>
+</body>
+</html>
