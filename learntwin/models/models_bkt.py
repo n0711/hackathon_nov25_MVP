@@ -1,5 +1,5 @@
 <<<<<<< HEAD
-﻿from dataclasses import dataclass
+from dataclasses import dataclass
 from typing import Dict, Tuple
 =======
 from dataclasses import dataclass

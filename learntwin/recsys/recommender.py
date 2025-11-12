@@ -1,5 +1,5 @@
-﻿<<<<<<< HEAD
-﻿from __future__ import annotations
+<<<<<<< HEAD
+from __future__ import annotations
 from typing import List, Dict, Tuple
 from dataclasses import dataclass
 from learntwin.models.models_bkt import BKTModel
