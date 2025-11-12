@@ -1,7 +1,5 @@
-__pycache__/
-*.pyc
-*.pyo
-.env
-.env.*
-.DS_Store
-Thumbs.db
+media/
+*.mp4
+*.mov
+*.avi
+*.mkv
