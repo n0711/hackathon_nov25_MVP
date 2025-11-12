@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Logo from './Logo';
+import { sendMetrics } from './api';
 
 function StudentView({ sessionCode }) {
   const [mode, setMode] = useState('reflection'); // 'reflection' or 'live'
@@ -22,17 +23,108 @@ function StudentView({ sessionCode }) {
     }));
   };
 
-  const handleLiveSignal = (signal, emoji) => {
-    console.log(`Live signal sent: ${signal}, Confidence: ${confidence}`);
-    setFeedback(`${emoji} ${signal} sent!`);
+  const handleLiveSignal = async (signal, emoji) => {
+    // Map signal to backend format (binary flags)
+    const signalMap = {
+      'Stuck': { stuck: 1, got_it: 0, pause: 0, example: 0 },
+      'Got it': { stuck: 0, got_it: 1, pause: 0, example: 0 },
+      'Pause': { stuck: 0, got_it: 0, pause: 1, example: 0 },
+      'Example?': { stuck: 0, got_it: 0, pause: 0, example: 1 }
+    };
+
+    const metrics = [{
+      class_id: sessionCode,
+      student_id: Math.floor(Math.random() * 1000000), // Random student ID for anonymity
+      ...signalMap[signal],
+      confidence: confidence * 2, // Scale 1-5 to 1-10
+      timestamp: new Date().toISOString()
+    }];
+
+    try {
+      await sendMetrics(metrics);
+      console.log(`Live signal sent: ${signal}, Confidence: ${confidence}`);
+      setFeedback(`${emoji} ${signal} sent!`);
+    } catch (error) {
+      setFeedback(`❌ Failed to send signal`);
+      console.error('Error sending live signal:', error);
+    }
+
     setTimeout(() => setFeedback(''), 2000);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Submitted:', { name, sessionNum, signals, confidence });
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 3000);
+
+    // Build array of metric records - one for each signal count
+    const metrics = [];
+    const studentId = Math.floor(Math.random() * 1000000); // Same student ID for all records in this submission
+
+    // Add records for each "stuck" signal
+    for (let i = 0; i < signals.stuck; i++) {
+      metrics.push({
+        class_id: sessionCode,
+        student_id: studentId,
+        stuck: 1,
+        got_it: 0,
+        pause: 0,
+        example: 0,
+        confidence: confidence * 2, // Scale 1-5 to 1-10
+        timestamp: new Date().toISOString()
+      });
+    }
+
+    // Add records for each "got it" signal
+    for (let i = 0; i < signals.gotIt; i++) {
+      metrics.push({
+        class_id: sessionCode,
+        student_id: studentId,
+        stuck: 0,
+        got_it: 1,
+        pause: 0,
+        example: 0,
+        confidence: confidence * 2,
+        timestamp: new Date().toISOString()
+      });
+    }
+
+    // Add records for each "pause" signal
+    for (let i = 0; i < signals.pause; i++) {
+      metrics.push({
+        class_id: sessionCode,
+        student_id: studentId,
+        stuck: 0,
+        got_it: 0,
+        pause: 1,
+        example: 0,
+        confidence: confidence * 2,
+        timestamp: new Date().toISOString()
+      });
+    }
+
+    // Add records for each "example" signal
+    for (let i = 0; i < signals.example; i++) {
+      metrics.push({
+        class_id: sessionCode,
+        student_id: studentId,
+        stuck: 0,
+        got_it: 0,
+        pause: 0,
+        example: 1,
+        confidence: confidence * 2,
+        timestamp: new Date().toISOString()
+      });
+    }
+
+    try {
+      const result = await sendMetrics(metrics);
+      console.log('Submitted:', { name, sessionNum, signals, confidence });
+      console.log('Backend response:', result);
+      setSubmitted(true);
+      setTimeout(() => setSubmitted(false), 3000);
+    } catch (error) {
+      console.error('Error submitting reflection:', error);
+      alert('Failed to submit reflection. Please try again.');
+    }
   };
 
   const totalSignals = signals.stuck + signals.gotIt + signals.pause + signals.example;

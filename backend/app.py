@@ -8,6 +8,7 @@ from datetime import datetime, timezone
 from typing import List
 
 from fastapi import Depends, FastAPI, Header, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from schemas import (
     MetricsRecord,
     MetricsIngestReport,
@@ -28,6 +29,15 @@ app = FastAPI(
         "**Auth:** send header `X-API-Key`."
     ),
     contact={"name": "Team", "email": "team@example.com"},
+)
+
+# Add CORS middleware to allow frontend requests
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173", "http://localhost:5174"],  # Vite dev server ports
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 
