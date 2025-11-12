@@ -4,3 +4,9 @@ media/
 *.avi
 *.mkv
 path/to/file.mp4
+
+.venv/
+node_modules/
+__pycache__/
+*.pyc
+
