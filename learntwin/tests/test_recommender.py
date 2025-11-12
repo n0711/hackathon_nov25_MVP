@@ -1,4 +1,6 @@
-﻿from learntwin.models.models_bkt import BKTModel, BKTParams
+from __future__ import annotations
+from dataclasses import dataclass
+from learntwin.models.models_bkt import BKTModel, BKTParams
 from learntwin.recsys.recommender import Recommender, Item
 def test_next_items_deterministic_catalog_order_independent():
     bkt = BKTModel(BKTParams(p_init=0.2))

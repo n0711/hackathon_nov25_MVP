@@ -1,4 +1,6 @@
-﻿from learntwin import BKT
+from __future__ import annotations
+from dataclasses import dataclass
+from learntwin import BKT
 
 def test_bkt_api_shape():
     bkt = BKT()

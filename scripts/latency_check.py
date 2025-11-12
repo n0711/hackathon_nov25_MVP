@@ -1,4 +1,6 @@
-﻿import time
+from __future__ import annotations
+from dataclasses import dataclass
+import time
 from learntwin import BKT, Recommender
 
 def main():

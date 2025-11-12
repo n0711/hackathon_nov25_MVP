@@ -1,4 +1,6 @@
-﻿from learntwin import BKT, Recommender
+from __future__ import annotations
+from dataclasses import dataclass
+from learntwin import BKT, Recommender
 
 def test_bkt_deterministic_seed():
     a = BKT(seed=42)
