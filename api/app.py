@@ -1,48 +1,77 @@
-﻿from __future__ import annotations
-from fastapi import FastAPI
+﻿from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from typing import List, Dict, Any
-from learntwin import BKT, Recommender
+from typing import Dict, Any, List
 
-app = FastAPI(title="Learntwin API", version="0.1.0")
 
-# shared demo instances
-bkt = BKT()
-rec = Recommender(bkt=bkt)
+app = FastAPI(title="Learntwin backend")
 
-class GetMasteryReq(BaseModel):
-    user_id: str
-    skill_id: str
+# Allow local dev frontends to call the API
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],        # for hackathon demo we allow everything
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
-class GetMasteryResp(BaseModel):
-    user_id: str
-    skill_id: str
-    mastery: float
 
-class Candidate(BaseModel):
-    item_id: str
-    skill_id: str
+class Payload(BaseModel):
+    data: Dict[str, Any]
 
-class NextItemsReq(BaseModel):
-    user_id: str
-    candidates: List[Candidate]
-    k: int = 5
 
-class NextItemsResp(BaseModel):
-    user_id: str
-    items: List[Dict[str, Any]]
+@app.get("/health")
+def health():
+    return {"status": "ok"}
 
-@app.post("/api/get_mastery", response_model=GetMasteryResp)
-def get_mastery(req: GetMasteryReq):
-    m = bkt.get_mastery(req.user_id, req.skill_id)
-    return {"user_id": req.user_id, "skill_id": req.skill_id, "mastery": float(m)}
 
-@app.post("/api/update")
-def update(user_id: str, skill_id: str, is_correct: bool):
-    m = bkt.update(user_id, skill_id, is_correct)
-    return {"user_id": user_id, "skill_id": skill_id, "mastery": float(m)}
+def _extract_mastery(data: Dict[str, Any]) -> Dict[str, float]:
+    """
+    Try to find a mastery dict inside the incoming JSON.
+    We look for a key called 'mastery' or any numeric-only dict.
+    """
+    if isinstance(data.get("mastery"), dict):
+        return {
+            k: float(v)
+            for k, v in data["mastery"].items()
+            if isinstance(v, (int, float))
+        }
 
-@app.post("/api/next_items", response_model=NextItemsResp)
-def next_items(req: NextItemsReq):
-    items = rec.next_items(req.user_id, [c.dict() for c in req.candidates], k=req.k)
-    return {"user_id": req.user_id, "items": items}
+    for _, v in data.items():
+        if isinstance(v, dict) and all(isinstance(val, (int, float)) for val in v.values()):
+            return {kk: float(vv) for kk, vv in v.items()}
+
+    return {}
+
+
+@app.post("/recommend")
+def recommend(payload: Payload):
+    """
+    Rule-based recommender for demo:
+    - Find mastery dict
+    - Sort ascending by mastery
+    - Return up to 3 weakest topics as 'reinforce' recommendations
+    """
+    mastery = _extract_mastery(payload.data)
+
+    if not mastery:
+        return {
+            "received_keys": list(payload.data.keys()),
+            "recommendations": [],
+            "message": "No mastery structure found in JSON; nothing to recommend.",
+        }
+
+    sorted_topics: List[tuple[str, float]] = sorted(mastery.items(), key=lambda kv: kv[1])
+    weakest = sorted_topics[:3]
+
+    recommendations = [
+        {"topic": name, "mastery": score, "action": "reinforce"}
+        for name, score in weakest
+    ]
+
+    return {
+        "received_keys": list(payload.data.keys()),
+        "mastery_topics": list(mastery.keys()),
+        "recommendations": recommendations,
+        "message": "Learntwin backend produced rule-based recommendations.",
+    }

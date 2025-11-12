@@ -1,0 +1,6 @@
+file 'C:/Users/nadio/Documents/hackathon_nov25_MVP/media/screens/0001.png'
+file 'C:/Users/nadio/Documents/hackathon_nov25_MVP/media/screens/0002.png'
+file 'C:/Users/nadio/Documents/hackathon_nov25_MVP/media/screens/0003.png'
+file 'C:/Users/nadio/Documents/hackathon_nov25_MVP/media/screens/0004.png'
+file 'C:/Users/nadio/Documents/hackathon_nov25_MVP/media/screens/0005.png'
+file 'C:/Users/nadio/Documents/hackathon_nov25_MVP/media/screens/0006.png'
