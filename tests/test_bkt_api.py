@@ -1,4 +1,4 @@
-﻿from learntwin import BKT
+from learntwin import BKT
 
 def test_bkt_api_shape():
     bkt = BKT()

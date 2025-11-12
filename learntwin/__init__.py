@@ -1,3 +1,3 @@
-__all__ = ["BKT", "Recommender"]
-from .models_bkt import BKT
-from .recommender import Recommender
+from .recsys.recommender import Recommender, Item, next_items
+from .models_bkt import BKTModel as BKT, BKTParams  # canonical
+__all__ = ["BKT", "BKTParams", "Recommender", "Item", "next_items"]

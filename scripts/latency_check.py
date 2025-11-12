@@ -1,4 +1,4 @@
-﻿import time
+import time
 from learntwin import BKT, Recommender
 
 def main():

@@ -1,2 +1,2 @@
-﻿def test_imports():
+def test_imports():
     from learntwin import BKT, Recommender  # noqa
