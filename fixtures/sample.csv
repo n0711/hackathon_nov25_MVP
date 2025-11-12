@@ -1,0 +1,9 @@
+﻿student_id,activity,timestamp,score
+s001,login,2025-11-10T08:10:00Z,78
+s002,quiz_module3,2025-11-10T09:05:00Z,64
+s001,watch_video,2025-11-11T19:40:00Z,72
+s003,quiz_module3,2025-11-12T07:55:00Z,58
+s002,forum_post,2025-11-12T20:15:00Z,70
+s003,watch_video,2025-11-12T22:10:00Z,61
+s004,login,2025-11-12T07:20:00Z,83
+s004,quiz_module1,2025-11-12T07:45:00Z,86

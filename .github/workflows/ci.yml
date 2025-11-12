@@ -1,0 +1,17 @@
+﻿name: Learntwin CI
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run lint + smoke
+        shell: pwsh
+        run: |
+          Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+          ./scripts/lint.ps1
+          ./scripts/smoke.ps1
