@@ -1,3 +1,4 @@
+from __future__ import annotations
 from learntwin import BKT
 from learntwin.models_bkt import BKTParams
 import math

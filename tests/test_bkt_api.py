@@ -1,3 +1,4 @@
+from __future__ import annotations
 from learntwin import BKT
 
 def test_bkt_api_shape():

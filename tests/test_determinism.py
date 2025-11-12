@@ -1,3 +1,4 @@
+from __future__ import annotations
 from learntwin import BKT, Recommender
 
 def test_bkt_deterministic_seed():
