@@ -1,0 +1,9 @@
+﻿{
+  "student_id": "demo-1",
+  "class_id": "Math7A",
+  "mastery": {
+    "fractions": 0.6,
+    "algebra": 0.3,
+    "geometry": 0.8
+  }
+}
