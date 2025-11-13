@@ -1,4 +1,4 @@
-📘 Pipes & Persistence – Backend API
+﻿📘 Pipes & Persistence – Backend API
 🔧 Overview
 
 This backend service provides the data pipeline for the Learntwin project.
@@ -123,3 +123,28 @@ The /recommend/{class_id} endpoint is modular — it can later be replaced with 
 Data and logic are class-centric, not student-centric, to support aggregated insights.
 
 Every upload updates class statistics and recommendations dynamically.
+
+## Team & Roles
+
+LearnTwin was created by:
+
+- **Charalampos Nadiotis** – Project manager and team leader; integration & orchestration (connecting backend and frontend, deployment, documentation) and **design/implementation of the initial AI and learning-analytics algorithms** (rules, logic, and experiments behind the insights).
+- **Andreas Lazarou** – Frontend developer (UI implementation, user flows, components, and integration with backend APIs).
+- **Christos Paparistodimou** – Backend developer (API design, business logic, data handling, and integration points for analytics and future extensions).
+
+Contributions from other developers and educators are welcome via pull requests.
+
+## Attribution
+
+LearnTwin is free and open-source software licensed under the [MIT License](./LICENSE).
+
+LearnTwin was initiated by **Charalampos Nadiotis + colleagues**  
+(**frontend:** Andreas Lazarou, **backend:** Christos Paparistodimou, **AI/analytics logic & integration:** Charalampos Nadiotis).
+
+If you use LearnTwin in a product, research project, or deployment that is visible to end users,
+we kindly ask (but do not legally require) that you include a small note such as:
+
+> Powered by LearnTwin – https://github.com/n0711/hackathon_nov25_MVP
+
+This helps the project grow, demonstrate its impact in education, and attract more contributors.
+
