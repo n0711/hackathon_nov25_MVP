@@ -5,6 +5,14 @@ ROOT = Path(__file__).resolve().parents[1]
 DATA_DIR = ROOT / 'sample_data'
 DEFAULT_NAME = 'demo_class.csv'
 
+EXPECTED_COLS = {
+    'student_id',
+    'student_name',
+    'avg_score',
+    'attendance_rate',
+    'last_activity_days_ago',
+}
+
 
 def find_data_file() -> Path:
     # Return a CSV path under sample_data/, or exit with a clear message.
@@ -19,7 +27,6 @@ def find_data_file() -> Path:
     if not csv_files:
         raise SystemExit(f'No CSV files found under {DATA_DIR}')
 
-    # Fall back to the first CSV we find
     print(f'[{DEFAULT_NAME} not found] Using {csv_files[0].name} instead.')
     return csv_files[0]
 
@@ -37,13 +44,7 @@ def _to_float(row, key, default=0.0):
         return default
 
 
-def main():
-    data_path = find_data_file()
-    rows = load_rows(data_path)
-    if not rows:
-        print(f'No rows in {data_path}')
-        return
-
+def rich_demo(data_path: Path, rows):
     total = len(rows)
     avg_score = sum(_to_float(r, 'avg_score') for r in rows) / total
     avg_att = sum(_to_float(r, 'attendance_rate') for r in rows) / total
@@ -68,6 +69,35 @@ def main():
         sid = r.get('student_id', '?')
         name = r.get('student_name', '?')
         print(f'  - {sid} | {name}')
+
+
+def generic_demo(data_path: Path, rows):
+    print('LearnTwin demo on sample data (generic mode)')
+    print('-' * 50)
+    print(f'File used        : {data_path.relative_to(ROOT)}')
+    print(f'Rows in file     : {len(rows)}')
+    if not rows:
+        return
+    cols = sorted(rows[0].keys())
+    print(f'Columns          : {', '.join(cols)}')
+    print()
+    print('First rows:')
+    for i, r in enumerate(rows[:5], start=1):
+        print(f'  #{i}: {r}')
+
+
+def main():
+    data_path = find_data_file()
+    rows = load_rows(data_path)
+    if not rows:
+        print(f'No rows in {data_path}')
+        return
+
+    cols = set(rows[0].keys())
+    if EXPECTED_COLS.issubset(cols):
+        rich_demo(data_path, rows)
+    else:
+        generic_demo(data_path, rows)
 
 
 if __name__ == '__main__':
