@@ -28,14 +28,15 @@ but not the time or tools to turn it into something actionable. LearnTwin aims t
    py -3.10 -m venv .venv
    .\.venv\Scripts\Activate.ps1
 
-3. Install dependencies (if requirements.txt is present):
+3. Install dependencies:
    pip install -r requirements.txt
 
-4. Run the backend demo (adjust this command to the actual entrypoint):
-   python app.py
+4. Run the test suite to verify everything works:
+   pytest
 
-   If there is no app.py, check the src/ or learntwin/ folders for the main entrypoint
-   and update this README accordingly.
+   At this stage LearnTwin behaves as a Python library with tests rather than a
+   standalone server application. To explore the core logic, inspect the modules
+   under src/ and learntwin/.
 
 ## Sample data
 
