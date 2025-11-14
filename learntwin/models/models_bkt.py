@@ -1,4 +1,4 @@
-from __future__ import annotations
+﻿from __future__ import annotations
 from dataclasses import dataclass
 from typing import Dict, Tuple 
 @dataclass
@@ -9,7 +9,7 @@ class BKTParams:
     p_slip: float = 0.1
 
 class BKTModel:
-def __init__(self, params: BKTParams | None = None):
+    def __init__(self, params: BKTParams | None = None):
         self.params = params or BKTParams()
         self._state: Dict[Tuple[str, str], float] = {} 
 
