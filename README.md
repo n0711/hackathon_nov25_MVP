@@ -1,4 +1,4 @@
-# LearnTwin
+﻿# LearnTwin
 
 LearnTwin is an open-source learning-analytics core that turns simple classroom data
 (attendance, activity, scores, small signals) into clear, teacher-friendly insights.
@@ -25,7 +25,7 @@ but not the time or tools to turn it into something actionable. LearnTwin aims t
    cd LearnTwin
 
 2. Create and activate a virtual environment:
-   py -3.10 -m venv .venv
+   python -m venv .venv
    .\.venv\Scripts\Activate.ps1
 
 3. Install dependencies:
@@ -72,3 +72,4 @@ AI/analytics logic & integration: Charalampos Nadiotis).
 
 If you use LearnTwin in a product or deployment visible to end users,
 If you use LearnTwin in a product or deployment visible to end users, we kindly require that you show a small "Powered by Charalampos Nadiotis and team" note.
+
