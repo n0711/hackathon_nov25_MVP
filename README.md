@@ -1,4 +1,4 @@
-﻿# LearnTwin
+# LearnTwin
 
 LearnTwin is an open-source learning-analytics core that turns simple classroom data
 (attendance, activity, scores, small signals) into clear, teacher-friendly insights.
@@ -71,4 +71,4 @@ Originally initiated by Charalampos Nadiotis + colleagues
 AI/analytics logic & integration: Charalampos Nadiotis).
 
 If you use LearnTwin in a product or deployment visible to end users,
-If you use LearnTwin in a product or deployment visible to end users, we kindly ask (but do not require) that you show a small "Powered by LearnTwin" note.
+If you use LearnTwin in a product or deployment visible to end users, we kindly require that you show a small "Powered by Charalampos Nadiotis and team" note.
