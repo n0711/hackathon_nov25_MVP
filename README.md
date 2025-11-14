@@ -71,4 +71,4 @@ Originally initiated by Charalampos Nadiotis + colleagues
 AI/analytics logic & integration: Charalampos Nadiotis).
 
 If you use LearnTwin in a product or deployment visible to end users,
-we kindly ask (but do not require) that you show a small "Powered by LearnTwin" note.
+If you use LearnTwin in a product or deployment visible to end users, we kindly ask (but do not require) that you show a small "Powered by LearnTwin" note.
